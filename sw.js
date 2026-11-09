@@ -1,4 +1,4 @@
-const C="hitombo-v18";
+const C="hitombo-v19";
 const A=["./","./index.html","./manifest.json","./verses.json","./icon-192.png","./icon-512.png"];
 self.addEventListener("install",e=>{e.waitUntil((async()=>{
   const c=await caches.open(C);
