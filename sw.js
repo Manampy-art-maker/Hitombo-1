@@ -1,5 +1,5 @@
-const C="hitombo-v19";
-const A=["./","./index.html","./manifest.json","./verses.json","./icon-192.png","./icon-512.png"];
+const C="hitombo-v22";
+const A=["./","./index.html","./manifest.json","./verses.json","./baiboly.json","./icon-192.png","./icon-512.png"];
 self.addEventListener("install",e=>{e.waitUntil((async()=>{
   const c=await caches.open(C);
   await Promise.allSettled(A.map(async u=>{const r=await fetch(u,{cache:"reload"});if(r.ok)await c.put(u,r)}));

@@ -4,5 +4,6 @@ HITOMBO (PWA)
 3. Sokafy ny rohy GitHub Pages indray mandeha MIARAKA AMIN'NY INTERNET.
 4. Ao amin'ny Chrome: menu (3 teboka) > "Hametraka ny rindrambaiko" na "Ampiana amin'ny efijery fandraisana".
 5. Hamarino ao amin'ny pejy voalohany fa misy ny soratra "Vonona hiasa tsy misy internet".
+Ao amin’ny zip dia misy ny baiboly.json (Baiboly feno, ~4,6 MB). Apetraho miaraka amin’ny rakitra hafa.
 Aorian'izay dia tsy mila internet intsony ny Hitombo.
 Contact : 034 03 679 73
