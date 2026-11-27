@@ -1,5 +1,6 @@
-const C="hitombo-v29";
+const C="hitombo-v30";
 const A=["./","./index.html","./manifest.json","./verses.json","./baiboly.json","./icon-192.png","./icon-512.png"];
+for(let i=0;i<78;i++)A.push("./cards/c"+i+".jpg");
 self.addEventListener("install",e=>{e.waitUntil((async()=>{
   const c=await caches.open(C);
   await Promise.allSettled(A.map(async u=>{const r=await fetch(u,{cache:"reload"});if(r.ok)await c.put(u,r)}));
@@ -11,8 +12,9 @@ self.addEventListener("fetch",e=>{if(e.request.method!=="GET")return;
 e.respondWith(caches.match(e.request,{ignoreSearch:true}).then(r=>r||fetch(e.request).then(n=>{if(n.ok&&new URL(e.request.url).origin===self.location.origin){const cp=n.clone();caches.open(C).then(c=>c.put(e.request,cp))}return n}).catch(()=>caches.match("./index.html"))))});
 async function showVerse(){
   const r=(await caches.match("./verses.json"))||(await fetch("./verses.json"));
-  const l=await r.json();const v=l[Math.floor(Date.now()/864e5)%l.length];
-  return self.registration.showNotification("Teny androany: "+v[0],{body:v[1],icon:"./icon-192.png",tag:"teny-androany"});
+  const l=await r.json();const i=Math.floor(Date.now()/864e5)%l.length;const v=l[i];
+  const body=v[1].replace(/(^|\n)\d+\s+/g," ").trim()+(v[2]?"\n🙏 "+v[2]:"");
+  return self.registration.showNotification("Teny androany: "+v[0],{body:body,icon:"./icon-192.png",badge:"./icon-192.png",image:"./cards/c"+i+".jpg",tag:"teny-androany",data:{u:"./index.html#teny"}});
 }
 self.addEventListener("periodicsync",e=>{if(e.tag==="teny-androany")e.waitUntil(showVerse())});
-self.addEventListener("notificationclick",e=>{e.notification.close();e.waitUntil(self.clients.matchAll({type:"window"}).then(cs=>cs.length?cs[0].focus():self.clients.openWindow("./index.html")))});
+self.addEventListener("notificationclick",e=>{e.notification.close();e.waitUntil(self.clients.matchAll({type:"window"}).then(cs=>cs.length?cs[0].focus().then(c=>{if(c&&c.navigate)return c.navigate("./index.html#teny")}):self.clients.openWindow("./index.html#teny")))});
